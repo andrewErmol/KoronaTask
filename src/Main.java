@@ -16,6 +16,5 @@ public class Main {
         Map<String, List<Person>> personMap = PersonGrouping.groupByDepartment(people);
         CsvWriter.write(outputFilePath, personMap, ",", "name", true);
         ConsoleWriter.printGroupedByDepartment(personMap, "name", false);
-        //jkigyigihkn
     }
 }
