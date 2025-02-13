@@ -5,6 +5,7 @@ import models.Manager;
 import models.Person;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,16 +14,18 @@ public class PersonParser {
     private static final List<String> incorrectData = new ArrayList<>();
 
     public static Optional<Person> parse(String[] fields) {
+        fields = cleanFields(fields);
+
         if (!isValidFormat(fields)) {
             incorrectData.add(String.join(",", fields));
             return Optional.empty();
         }
 
-        String position = fields[0].trim();
+        String position = fields[0];
         int id;
-        String name = fields[2].trim();
-        String salary = fields[3].trim();
-        String departmentOrManagerId = fields[4].trim();
+        String name = fields[2];
+        String salary = fields[3];
+        String departmentOrManagerId = fields[4];
 
         try {
             id = Integer.parseInt(fields[1].trim());
@@ -45,8 +48,8 @@ public class PersonParser {
     private static boolean isValidFormat(String[] fields) {
         if (fields.length < 5) return false;
 
-        String position = fields[0].trim();
-        String salary = fields[3].trim();
+        String position = fields[0];
+        String salary = fields[3];
 
         try {
             double salaryValue = Double.parseDouble(salary);
@@ -75,5 +78,11 @@ public class PersonParser {
 
     public static List<String> getIncorrectData() {
         return incorrectData;
+    }
+
+    private static String[] cleanFields(String[] fields) {
+        return Arrays.stream(fields)
+                .map(String::trim)
+                .toArray(String[]::new);
     }
 }

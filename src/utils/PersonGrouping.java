@@ -6,10 +6,7 @@ import models.Person;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PersonGrouping {
 
@@ -22,7 +19,7 @@ public class PersonGrouping {
             }
         }
 
-        Map<String, List<Person>> departmentMap = new HashMap<>();
+        Map<String, List<Person>> departmentMap = new TreeMap<>();
         for (Person person : people) {
             String department = null;
             if (person instanceof Manager) {

@@ -17,7 +17,7 @@ public class ConsoleWriter {
             List<Person> persons = entry.getValue();
 
             // Сортируем сотрудников внутри департамента
-            PersonSorter.sortEmployees(persons, sortBy, ascending);
+            EmployeeSorter.sortEmployees(persons, sortBy, ascending);
 
             System.out.println(department);
             for (Person person : persons) {

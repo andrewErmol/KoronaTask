@@ -5,23 +5,22 @@ import models.Manager;
 import models.Person;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-public class CsvWriter {
+public class FileWriter {
 
     public static void write(String filePath, Map<String, List<Person>> departmentMap, String separator, String sortBy, boolean ascending) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(filePath))) {
 
             for (Map.Entry<String, List<Person>> entry : departmentMap.entrySet()) {
                 String department = entry.getKey();
                 List<Person> persons = entry.getValue();
 
                 // Сортируем сотрудников внутри департамента
-                PersonSorter.sortEmployees(persons, sortBy, ascending);
+                EmployeeSorter.sortEmployees(persons, sortBy, ascending);
 
                 bw.write(department);
                 bw.newLine();
